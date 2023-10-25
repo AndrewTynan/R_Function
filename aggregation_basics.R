@@ -71,24 +71,3 @@ kbl_settings(.,
             group_custom_header = 'Clarity',
             custom_header = 'Cut')  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
