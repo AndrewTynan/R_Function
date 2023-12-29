@@ -29,11 +29,70 @@ as.character(seq(1:3))
 IRdisplay::display_html(as.character(x))  
 
 
-#**********************
-#**********************
-#******* Stats ********
-#**********************
-#**********************
+#################################################
+#################################################
+############# Some stat functions ###############
+#################################################
+#################################################
+
+# NEED to consider adding this 
+sem <- function(x, na.rm = FALSE) {
+  out <-sd(x, na.rm = na.rm)/sqrt(length(x))
+  return(out)
+}
+
+# http://ianmadd.github.io/pages/Confidence_Intervals_Part2.html#t-distribution-functions-dt-pt-qt-rt.
+
+Confidence_Interval_95_perc <- qt(.975, df=19) * (sd(metric)/sqrt(length(metric)))
+
+t.test(metric)$"conf.int"    
+
+t.test(sampledata)
+
+conf.int = function(x) t.test(x)$conf.int
+
+# R program to find the confidence interval  https://www.geeksforgeeks.org/how-to-find-confidence-intervals-in-r/
+ 
+# Confidence Interval = (point estimate)+/-(critical value)*(standard error)
+
+# Confidence Interval = x+/-tn-1, 1-α/2*(s/√n)
+
+# where:
+
+# x: sample mean
+
+# t: the t-critical value
+
+# s: sample standard deviation
+
+# n: sample size
+
+# Calculate the mean of the sample data
+mean_value <- mean(iris$Sepal.Length)
+ 
+# Compute the size
+n <- length(iris$Sepal.Length)
+ 
+# Find the standard deviation
+standard_deviation <- sd(iris$Sepal.Length)
+ 
+# Find the standard error
+standard_error <- standard_deviation / sqrt(n)
+
+alpha = 0.05
+degrees_of_freedom = n - 1
+
+t_score = qt(p=alpha/2, df=degrees_of_freedom,lower.tail=F)
+
+margin_error <- t_score * standard_error
+ 
+# Calculating lower bound and upper bound
+lower_bound <- mean_value - margin_error
+upper_bound <- mean_value + margin_error
+ 
+# Print the confidence interval
+print(c(lower_bound,upper_bound))
+
 
 d          <- sample(data[name] %>% pull(.), 50)
 shapiro    <- shapiro.test(d) %>% glance(.)
